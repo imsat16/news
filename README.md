@@ -1,4 +1,4 @@
-# News App Project
+# Tech News App Project
 
 ## Ars University - Informatics Engineering
 
