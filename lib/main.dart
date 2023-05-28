@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news/more.dart';
 import 'package:news/search_pages.dart';
 
 void main() {
@@ -53,10 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       style: optionStyle,
     ),
     SearchPage(),
-    Text(
-      "Lainnya Pages",
-      style: optionStyle,
-    ),
+    MorePages(),
   ];
 
   void _onItemTapped(int index) {

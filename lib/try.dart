@@ -24,11 +24,13 @@ class TryPages extends StatelessWidget {
             const Text('D'),
 
             Expanded(
-              flex:2,
-            child: Image.network('https://tse4.mm.bing.net/th?id=OIP.8o2qvLl86neYTfZGXVGgNwHaEo&pid=Api&P=0&h=180'),),
+            child: Image.network('https://tse4.mm.bing.net/th?id=OIP.8o2qvLl86neYTfZGXVGgNwHaEo&pid=Api&P=0&h=180'),
+            ),
             
             const Text('jancok'),
-            Image.network('https://tse2.mm.bing.net/th?id=OIP.fy2NmYZpjQrC36KM2p0y7wAAAA&pid=Api&P=0&h=180'),
+            Expanded(
+            child: Image.network('https://tse2.mm.bing.net/th?id=OIP.fy2NmYZpjQrC36KM2p0y7wAAAA&pid=Api&P=0&h=180'),
+            ),
           ],
         )),
       ),
