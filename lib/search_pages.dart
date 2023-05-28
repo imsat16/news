@@ -38,13 +38,31 @@ class _SearchPageState extends State<SearchPage> {
     print('Item tapped: ${results[index]['key']}');
   }
 
+  Future<Map<String, dynamic>> fetchDetailData(String itemId) async {
+    final String apiUrl = 'https://the-lazy-media-api.vercel.app/api/detail/$itemId';
+
+    var response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      print(json.decode(response.body));
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to fetch detail data');
+    }
+  }
+
   void navigateToDetailPage(int index) {
-    Navigator.push(
+    String itemId = results[index]['key'].toString();
+    print(itemId);
+    fetchDetailData(itemId).then((detailData){
+      Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DetailPage(data: results[index]),
+        builder: (context) => DetailPage(data: detailData),
       ),
     );
+    },).catchError((error){
+      print("error sat");
+    },);
   }
 
   @override
@@ -78,7 +96,7 @@ class _SearchPageState extends State<SearchPage> {
                           onPressed: () {
                             print("anjing");
                           },
-                          icon: const Icon(Icons.search),
+                          icon: const Icon(Icons.search, color: Colors.white,),
                         ),
                       )
                     ],
@@ -88,12 +106,12 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount: results.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          // leading: Image.network(
-                          //   results[index]['thumb'].toString(),
-                          //   width: 50,
-                          //   height: 50,
-                          //   fit: BoxFit.cover,
-                          // ),
+                          leading: Image.network(
+                            results[index]['thumb'].toString(),
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
                           title: Text(
                             results[index]['title'].toString(),
                             style: const TextStyle(
