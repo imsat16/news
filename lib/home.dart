@@ -25,7 +25,7 @@ class _HomePagesState extends State<HomePages> {
 
     var response = await http.get(Uri.parse(apiUrl));
 
-    if (response.statusCode == 200) {
+    if (mounted) {
       setState(() {
         var data = json.decode(response.body);
         results = List<Map<String, dynamic>>.from(data);
@@ -69,29 +69,31 @@ class _HomePagesState extends State<HomePages> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: results.length,
-        itemBuilder: (context, index) {
-          // var item = data[index];
-          return Column(
-            children: [
-              ListTile(
-                leading: Image.network(
-                  results[index]['thumb'].toString(),
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+        body: ListView.builder(
+          itemCount: results.length,
+          itemBuilder: (context, index) {
+            // var item = data[index];
+            return Column(
+              children: [
+                ListTile(
+                  leading: Image.network(
+                    results[index]['thumb'].toString(),
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(results[index]['title'].toString()),
+                  subtitle: Text(results[index]['author'].toString()),
+                  onTap: () {
+                    navigateToDetailPage(index);
+                  },
                 ),
-                title: Text(results[index]['title'].toString()),
-                subtitle: Text(results[index]['author'].toString()),
-                onTap: () {
-                  navigateToDetailPage(index);
-                },
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

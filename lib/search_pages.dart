@@ -65,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
       },
     ).catchError(
       (error) {
-        print("error sat");
+        print("error");
       },
     );
   }
@@ -77,64 +77,69 @@ class _SearchPageState extends State<SearchPage> {
       child: Scaffold(
         body: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: SearchBar(
-                          onChanged: (value) {
-                            searchData(value);
-                          },
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SearchBar(
+                        onChanged: (value) {
+                          searchData(value);
+                        },
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(8.0)),
+                    Ink(
+                      decoration: const ShapeDecoration(
+                        color: Colors.black87,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          print("anjing");
+                        },
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
                         ),
                       ),
-                      const Padding(padding: EdgeInsets.all(8.0)),
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Colors.black87,
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            print("anjing");
-                          },
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    ],
-                  )),
+                    )
+                  ],
+                ),
+              ),
+              results.isEmpty?const Text("Cari berita terupdate tentang Teknologi & Games"):
               Expanded(
-                  child: ListView.builder(
-                      itemCount: results.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Image.network(
-                            results[index]['thumb'].toString(),
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
-                          title: Text(
-                            results[index]['title'].toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          subtitle: Text(results[index]['tag'].toString()),
-                          trailing: const Icon(Icons.arrow_forward),
-                          onTap: () {
-                            // handleItemTap(index);
-                            navigateToDetailPage(index);
-                          },
-                        );
-                      }))
+                child: ListView.builder(
+                  itemCount: results.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Image.network(
+                        results[index]['thumb'].toString(),
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(
+                        results[index]['title'].toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      subtitle: Text(results[index]['tag'].toString()),
+                      trailing: const Icon(Icons.arrow_forward),
+                      onTap: () {
+                        // handleItemTap(index);
+                        navigateToDetailPage(index);
+                      },
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),

@@ -19,18 +19,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.black),
-          color: Colors.deepPurpleAccent,
-          foregroundColor: Colors.black,
+          iconTheme: IconThemeData(color: Colors.white),
+          color: Colors.black87,
+          foregroundColor: Colors.white,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.green,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
           ),
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const BottNav(title: 'Flutter Demo Home Page'),
+      home: const BottNav(title: 'T&G News'),
       // home: const SearchPage(),
     );
   }
@@ -69,9 +69,9 @@ class _BottNavState extends State<BottNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
