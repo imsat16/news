@@ -39,7 +39,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<Map<String, dynamic>> fetchDetailData(String itemId) async {
-    final String apiUrl = 'https://the-lazy-media-api.vercel.app/api/detail/$itemId';
+    final String apiUrl =
+        'https://the-lazy-media-api.vercel.app/api/detail/$itemId';
 
     var response = await http.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
@@ -53,16 +54,20 @@ class _SearchPageState extends State<SearchPage> {
   void navigateToDetailPage(int index) {
     String itemId = results[index]['key'].toString();
     print(itemId);
-    fetchDetailData(itemId).then((detailData){
-      Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailPage(data: detailData),
-      ),
+    fetchDetailData(itemId).then(
+      (detailData) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPage(data: detailData),
+          ),
+        );
+      },
+    ).catchError(
+      (error) {
+        print("error sat");
+      },
     );
-    },).catchError((error){
-      print("error sat");
-    },);
   }
 
   @override
@@ -96,7 +101,10 @@ class _SearchPageState extends State<SearchPage> {
                           onPressed: () {
                             print("anjing");
                           },
-                          icon: const Icon(Icons.search, color: Colors.white,),
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
@@ -126,9 +134,7 @@ class _SearchPageState extends State<SearchPage> {
                             navigateToDetailPage(index);
                           },
                         );
-                      }
-                    )
-                  )
+                      }))
             ],
           ),
         ),

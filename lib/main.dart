@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news/home.dart';
 import 'package:news/more.dart';
 import 'package:news/search_pages.dart';
 
@@ -29,30 +30,27 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const BottNav(title: 'Flutter Demo Home Page'),
       // home: const SearchPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class BottNav extends StatefulWidget {
+  const BottNav({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BottNav> createState() => _BottNavState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BottNavState extends State<BottNav> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      "Beranda",
-      style: optionStyle,
-    ),
+    HomePages(),
     SearchPage(),
     MorePages(),
   ];
