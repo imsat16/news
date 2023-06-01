@@ -47,8 +47,6 @@ class BottNav extends StatefulWidget {
 
 class _BottNavState extends State<BottNav> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePages(),
     SearchPage(),

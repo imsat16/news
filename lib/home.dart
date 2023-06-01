@@ -12,7 +12,7 @@ class HomePages extends StatefulWidget {
 }
 
 class _HomePagesState extends State<HomePages> {
-  List<Map<String, dynamic>> data = [];
+  List<Map<String, dynamic>> results = [];
 
   @override
   void initState() {
@@ -21,17 +21,16 @@ class _HomePagesState extends State<HomePages> {
   }
 
   Future<void> fetchData() async {
-    var url = Uri.parse('https://the-lazy-media-api.vercel.app/api/tech');
+    String apiUrl = "https://the-lazy-media-api.vercel.app/api/tech";
 
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
-      var fechedData = json.decode(response.body);
       setState(() {
-        data = List<Map<String, dynamic>>.from(fechedData);
+        var data = json.decode(response.body);
+        results = List<Map<String, dynamic>>.from(data);
       });
-      print(fetchData());
-      print(data);
+      print(results);
     } else {
       print('Failed get data from api');
     }
@@ -50,7 +49,7 @@ class _HomePagesState extends State<HomePages> {
   }
 
   void navigateToDetailPage(int index) {
-    String itemId = data[index]['key'].toString();
+    String itemId = results[index]['key'].toString();
     print(itemId);
     fetchDetailsData(itemId).then(
       (detailData) {
@@ -72,27 +71,25 @@ class _HomePagesState extends State<HomePages> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: data.length,
+        itemCount: results.length,
         itemBuilder: (context, index) {
           // var item = data[index];
-          return Container(
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Image.network(
-                    data[index]['thumb'].toString(),
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(data[index]['title'].toString()),
-                  subtitle: Text(data[index]['author'].toString()),
-                  onTap: () {
-                    navigateToDetailPage(index);
-                  },
+          return Column(
+            children: [
+              ListTile(
+                leading: Image.network(
+                  results[index]['thumb'].toString(),
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
                 ),
-              ],
-            ),
+                title: Text(results[index]['title'].toString()),
+                subtitle: Text(results[index]['author'].toString()),
+                onTap: () {
+                  navigateToDetailPage(index);
+                },
+              ),
+            ],
           );
         },
       ),

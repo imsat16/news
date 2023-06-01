@@ -8,7 +8,7 @@ class MorePages extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: Container(
-        margin: EdgeInsets.only(top: 50, bottom: 50),
+        margin: const EdgeInsets.only(top: 50, bottom: 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
