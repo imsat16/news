@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/home.dart';
+import 'package:news/modules/onboarding.dart';
 import 'package:news/more.dart';
 import 'package:news/search_pages.dart';
 
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const BottNav(title: 'T&G News'),
-      // home: const SearchPage(),
+      //home: const BottNav(title: 'T&G News'),
+       home: const OnBoarding(),
     );
   }
 }
