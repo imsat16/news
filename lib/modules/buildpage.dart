@@ -7,43 +7,45 @@ class BuildPage extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const BuildPage({ required this.urlImage,required this.title, required this.subtitle });
+  const BuildPage({super.key,  required this.urlImage,required this.title, required this.subtitle });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return Scaffold(
+      body: Column(
        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           Image.asset(
             urlImage,
             width: 250,
             height: 200,
           ),
-
+    
           const SizedBox(height: 30,),
-
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.teal.shade700,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+    
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-
+    
           const SizedBox(height: 30,),
-
+    
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
               subtitle,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.grey,
-                fontSize: 17,
+                fontSize: 14,
                 height: 1.5,
               ),
             ),

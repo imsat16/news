@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:news/detail_pages.dart';
+import 'package:news/modules/game_news_list.dart';
 
 class HomePages extends StatefulWidget {
   const HomePages({super.key});

@@ -32,8 +32,7 @@ class _OnBoardingState extends State<OnBoarding> {
             BuildPage(
               urlImage: 'assets/images/slide1.png',
               title: 'Stay in the Know with Ready To Read The News',
-              subtitle:
-                  'Select the Trendiest Technology and Gaming Updates!',
+              subtitle: 'Select the Trendiest Technology and Gaming Updates!',
             ),
             BuildPage(
               urlImage: 'assets/images/slide2.png',
@@ -44,8 +43,7 @@ class _OnBoardingState extends State<OnBoarding> {
             BuildPage(
               urlImage: 'assets/images/slide3.png',
               title: 'Ready To Read The News',
-              subtitle:
-                  'Handpick the Hottest News on Technology and Gaming!',
+              subtitle: 'Handpick the Hottest News on Technology and Gaming!',
             ),
           ],
         ),
@@ -53,8 +51,8 @@ class _OnBoardingState extends State<OnBoarding> {
       bottomSheet: isLastPage
           ? TextButton(
               style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.teal.shade700,
+                foregroundColor: Colors.white, 
+                backgroundColor: Colors.black87,
                 minimumSize: const Size.fromHeight(60),
               ),
               onPressed: () async {
@@ -62,7 +60,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 final prefs = await SharedPreferences.getInstance();
                 prefs.setBool('showChoose', true);
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const BottNav(title: 'T&G News')),
+                  MaterialPageRoute(
+                      builder: (context) => const BottNav(title: 'T&G News')),
                 );
               },
               child: const Text(
@@ -82,13 +81,14 @@ class _OnBoardingState extends State<OnBoarding> {
                 children: [
                   //skip
                   TextButton(
-                      onPressed: () => controller.jumpToPage(2),
-                      child: const Text(
-                        'SKIP',
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      )),
+                    onPressed: () => controller.jumpToPage(2),
+                    child: const Text(
+                      'SKIP',
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
                   //dots
                   Center(
                     child: SmoothPageIndicator(
@@ -97,7 +97,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       effect: const WormEffect(
                         spacing: 20,
                         dotColor: Colors.black26,
-                        activeDotColor: Colors.teal,
+                        activeDotColor: Colors.black87,
                       ),
                       //to click on dots and move
                       onDotClicked: (index) => controller.animateToPage(

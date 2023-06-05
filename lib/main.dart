@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/home.dart';
+import 'package:news/modules/game_news_list.dart';
 import 'package:news/modules/onboarding.dart';
 import 'package:news/more.dart';
 import 'package:news/search_pages.dart';
@@ -24,14 +25,18 @@ class MyApp extends StatelessWidget {
           color: Colors.black87,
           foregroundColor: Colors.white,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.green,
+            statusBarColor: Colors.black,
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.dark,
           ),
         ),
         primarySwatch: Colors.blue,
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.black
+        )
       ),
       //home: const BottNav(title: 'T&G News'),
+      //  home: const GameNewsList(),
        home: const OnBoarding(),
     );
   }
@@ -59,13 +64,6 @@ class _BottNavState extends State<BottNav> {
       _selectedIndex = index;
     });
   }
-  // int _counter = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
