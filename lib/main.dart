@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news/home.dart';
+import 'package:news/modules/game_news_list.dart';
+import 'package:news/modules/onboarding.dart';
 import 'package:news/more.dart';
 import 'package:news/search_pages.dart';
 
@@ -18,41 +21,40 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.black),
-          color: Colors.deepPurpleAccent,
-          foregroundColor: Colors.black,
+          iconTheme: IconThemeData(color: Colors.white),
+          color: Colors.black87,
+          foregroundColor: Colors.white,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.green,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light,
+            statusBarColor: Colors.black,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
           ),
         ),
         primarySwatch: Colors.blue,
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.black
+        )
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: const SearchPage(),
+      //home: const BottNav(title: 'T&G News'),
+      //  home: const GameNewsList(),
+       home: const OnBoarding(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class BottNav extends StatefulWidget {
+  const BottNav({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BottNav> createState() => _BottNavState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BottNavState extends State<BottNav> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      "Beranda",
-      style: optionStyle,
-    ),
+    HomePages(),
     SearchPage(),
     MorePages(),
   ];
@@ -62,20 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
   }
-  // int _counter = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
