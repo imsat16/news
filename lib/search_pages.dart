@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:news/detail_pages.dart';
 import 'package:news/modules/game_news_list.dart';
 import 'package:news/modules/tech_carousel.dart';
+import 'package:news/modules/tech_news_list.dart';
+import 'package:news/modules/view_all_news.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -129,14 +131,15 @@ class _SearchPageState extends State<SearchPage> {
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 10, top: 30),
+                    padding: const EdgeInsets.only(
+                        left: 8.0, right: 8.0, bottom: 10, top: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: SearchBar(
-                            hintText: "Cari berita Teknologi & Game dengan mudah",
+                            hintText:
+                                "Cari berita Teknologi & Game dengan mudah",
                             onChanged: (value) {
                               searchData(value);
                             },
@@ -163,40 +166,25 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   results.isEmpty
                       ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                              child: getNews.isNotEmpty ? const Text(
-                                "Tech News", 
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ): const Text("")
+                            const SizedBox(
+                              height: 20,
                             ),
-                            const SizedBox (
-                              height:200,
-                              child: TechCarousel(),
-                            ),
-                            const SizedBox(height: 20,),
                             const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 20.0),
                                   child: Text(
-                                    "Game News", 
+                                    "All News",
                                     style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold
-                                    ),
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 500,
-                                  child: GameNewsList()
-                                ),
+                                SizedBox(height: 500, child: AllNews()),
                               ],
                             )
                           ],
@@ -224,7 +212,8 @@ class _SearchPageState extends State<SearchPage> {
                                       fontSize: 16.0,
                                     ),
                                   ),
-                                  subtitle: Text(results[index]['tag'].toString()),
+                                  subtitle:
+                                      Text(results[index]['tag'].toString()),
                                   trailing: const Icon(Icons.arrow_forward),
                                   onTap: () {
                                     handleItemTap(index);

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:news/detail_pages.dart';
 import 'package:news/modules/game_news_list.dart';
+import 'package:news/modules/tech_carousel.dart';
 
 class HomePages extends StatefulWidget {
   const HomePages({super.key});
@@ -71,31 +72,66 @@ class _HomePagesState extends State<HomePages> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: ListView.builder(
-          itemCount: results.length,
-          itemBuilder: (context, index) {
-            // var item = data[index];
-            return Column(
-              children: [
-                ListTile(
-                  leading: Image.network(
-                    results[index]['thumb'].toString(),
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(results[index]['title'].toString()),
-                  subtitle: Text(results[index]['author'].toString()),
-                  onTap: () {
-                    navigateToDetailPage(index);
-                  },
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
+        child: Scaffold(
+      body: ListView(children: [
+        Column(
+          children: [
+            Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0, vertical: 20.0),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 155),
+                      child: const Text(
+                        "Breaking News",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child:
+                          ElevatedButton(onPressed: () {}, child: Text("data")),
+                    )
+                  ],
+                )),
+            const SizedBox(
+              height: 200,
+              child: TechCarousel(),
+            ),
+          ],
+        )
+      ]),
+    ));
   }
+  // Widget build(BuildContext context) {
+  //   return SafeArea(
+  //     child: Scaffold(
+  //       body: ListView.builder(
+  //         itemCount: results.length,
+  //         itemBuilder: (context, index) {
+  //           // var item = data[index];
+  //           return Column(
+  //             children: [
+  //               ListTile(
+  //                 leading: Image.network(
+  //                   results[index]['thumb'].toString(),
+  //                   width: 50,
+  //                   height: 50,
+  //                   fit: BoxFit.cover,
+  //                 ),
+  //                 title: Text(results[index]['title'].toString()),
+  //                 subtitle: Text(results[index]['author'].toString()),
+  //                 onTap: () {
+  //                   navigateToDetailPage(index);
+  //                 },
+  //               ),
+  //             ],
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 }

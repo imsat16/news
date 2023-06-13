@@ -69,8 +69,12 @@ class _BottNavState extends State<BottNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
+          title: Text(
+            widget.title,
+            style: const TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
