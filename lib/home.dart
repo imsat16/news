@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news/all_news.dart';
 import 'package:news/detail_pages.dart';
 import 'package:news/modules/game_news_list.dart';
 import 'package:news/modules/tech_carousel.dart';
+import 'package:news/modules/tech_news_list.dart';
 
 class HomePages extends StatefulWidget {
   const HomePages({super.key});
@@ -71,67 +73,142 @@ class _HomePagesState extends State<HomePages> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: ListView(children: [
-        Column(
-          children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0, vertical: 20.0),
+    return Scaffold(
+      body: Center(
+        child: ListView(children: [
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 12, right: 12),
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 155),
-                      child: const Text(
+                    const Flexible(
+                      fit: FlexFit.tight,
+                      child: Text(
                         "Breaking News",
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 5),
-                      child:
-                          ElevatedButton(onPressed: () {}, child: Text("data")),
-                    )
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AllNewsPage(key: UniqueKey()),
+                          ),
+                        );
+                      },
+                      child: const Text('View All'),
+                    ),
                   ],
-                )),
-            const SizedBox(
-              height: 200,
-              child: TechCarousel(),
-            ),
-          ],
-        )
-      ]),
-    ));
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 15),
+                child: SizedBox(
+                  height: 200,
+                  child: TechCarousel(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      child: Row(
+                        children: [
+                          const Flexible(
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: EdgeInsets.all(11),
+                              child: Text(
+                                "Technology News",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AllNewsPage(key: UniqueKey()),
+                                ),
+                              );
+                            },
+                            child: const Text('View All'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 200,
+                      child: TechNewsList(),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      child: Row(
+                        children: [
+                          const Flexible(
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: EdgeInsets.all(11),
+                              child: Text(
+                                "Game News",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AllNewsPage(key: UniqueKey()),
+                                ),
+                              );
+                            },
+                            child: const Text('View All'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 200,
+                      child: GameNewsList(),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
+        ]),
+      ),
+    );
   }
-  // Widget build(BuildContext context) {
-  //   return SafeArea(
-  //     child: Scaffold(
-  //       body: ListView.builder(
-  //         itemCount: results.length,
-  //         itemBuilder: (context, index) {
-  //           // var item = data[index];
-  //           return Column(
-  //             children: [
-  //               ListTile(
-  //                 leading: Image.network(
-  //                   results[index]['thumb'].toString(),
-  //                   width: 50,
-  //                   height: 50,
-  //                   fit: BoxFit.cover,
-  //                 ),
-  //                 title: Text(results[index]['title'].toString()),
-  //                 subtitle: Text(results[index]['author'].toString()),
-  //                 onTap: () {
-  //                   navigateToDetailPage(index);
-  //                 },
-  //               ),
-  //             ],
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
 }

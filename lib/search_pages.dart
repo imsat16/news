@@ -165,22 +165,22 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   results.isEmpty
-                      ? Column(
+                      ? const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: 10,
                             ),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 20.0),
+                                      horizontal: 15.0, vertical: 20.0),
                                   child: Text(
                                     "All News",
                                     style: TextStyle(
-                                        fontSize: 30,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

@@ -79,7 +79,16 @@ class _TechCarouselState extends State<TechCarousel> {
     ];
 
     return CarouselSlider(
-      options: CarouselOptions(height: 200.0),
+      options: CarouselOptions(
+        height: 180.0,
+        enlargeCenterPage: true,
+        autoPlay: true,
+        aspectRatio: 16 / 9,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enableInfiniteScroll: true,
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        viewportFraction: 0.8,
+      ),
       items: combinedData.map(
         (i) {
           return Builder(

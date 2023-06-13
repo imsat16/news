@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news/detail_pages.dart';
 
 class TechNewsList extends StatefulWidget {
   const TechNewsList({super.key});
@@ -11,6 +12,7 @@ class TechNewsList extends StatefulWidget {
 }
 
 class _TechNewsListState extends State<TechNewsList> {
+  List<Map<String, dynamic>> results = [];
   List<Map<String, dynamic>> techData = [];
 
   @override
@@ -35,6 +37,57 @@ class _TechNewsListState extends State<TechNewsList> {
     }
   }
 
+  Future<Map<String, dynamic>> fetchDetailData(String itemId) async {
+    final String apiUrl =
+        'https://the-lazy-media-api.vercel.app/api/detail/$itemId';
+
+    var response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      print(json.decode(response.body));
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to fetch detail data');
+    }
+  }
+
+  void navigateToDetailPage(int index) {
+    String itemId = results[index]['key'].toString();
+    print(itemId);
+    fetchDetailData(itemId).then(
+      (detailData) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPage(data: detailData),
+          ),
+        );
+      },
+    ).catchError(
+      (error) {
+        print("error");
+      },
+    );
+  }
+
+  void navigateToDetail(String item) {
+    // String itemId = getNews[i][].toString();
+    // print(itemId);
+    fetchDetailData(item).then(
+      (detailData) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPage(data: detailData),
+          ),
+        );
+      },
+    ).catchError(
+      (error) {
+        print("error");
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -50,7 +103,7 @@ class _TechNewsListState extends State<TechNewsList> {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      debugPrint('Card tapped.');
+                      navigateToDetailPage(index);
                     },
                     child: SizedBox(
                       height: 100,

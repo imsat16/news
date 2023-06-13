@@ -20,24 +20,22 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.white),
-          color: Colors.black87,
-          foregroundColor: Colors.white,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.black,
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.dark,
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.white),
+            color: Colors.black87,
+            foregroundColor: Colors.white,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.black,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.dark,
+            ),
           ),
-        ),
-        primarySwatch: Colors.blue,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.black
-        )
-      ),
+          primarySwatch: Colors.blue,
+          textSelectionTheme:
+              const TextSelectionThemeData(cursorColor: Colors.black)),
       //home: const BottNav(title: 'T&G News'),
       //  home: const GameNewsList(),
-       home: const OnBoarding(),
+      home: const OnBoarding(),
     );
   }
 }
@@ -69,6 +67,13 @@ class _BottNavState extends State<BottNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, // <-- SEE HERE
+          ),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+          ],
+          // centerTitle: true,
           title: Text(
             widget.title,
             style: const TextStyle(color: Colors.black),
