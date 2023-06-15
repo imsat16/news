@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:news/detail_pages.dart';
+import 'package:news/pages/detail_pages.dart';
 
 class TechCarousel extends StatefulWidget {
   const TechCarousel({Key? key});

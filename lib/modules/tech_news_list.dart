@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:news/detail_pages.dart';
+import 'package:news/pages/detail_pages.dart';
 
 class TechNewsList extends StatefulWidget {
   const TechNewsList({super.key});
@@ -50,8 +50,8 @@ class _TechNewsListState extends State<TechNewsList> {
     }
   }
 
-  void navigateToDetailPage(int index) {
-    String itemId = results[index]['key'].toString();
+  void navigateToDetailPage(String data) {
+    String itemId = data.toString();
     print(itemId);
     fetchDetailData(itemId).then(
       (detailData) {
@@ -99,11 +99,14 @@ class _TechNewsListState extends State<TechNewsList> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 width: double.infinity,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      navigateToDetailPage(index);
+                      navigateToDetailPage(techData[index]['key']);
                     },
                     child: SizedBox(
                       height: 100,

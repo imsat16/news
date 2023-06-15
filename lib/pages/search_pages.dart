@@ -5,11 +5,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:news/detail_pages.dart';
 import 'package:news/modules/game_news_list.dart';
 import 'package:news/modules/tech_carousel.dart';
 import 'package:news/modules/tech_news_list.dart';
 import 'package:news/modules/view_all_news.dart';
+import 'package:news/pages/detail_pages.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

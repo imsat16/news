@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:news/home.dart';
-import 'package:news/modules/game_news_list.dart';
+import 'package:news/pages/homePage.dart';
 import 'package:news/modules/onboarding.dart';
-import 'package:news/more.dart';
-import 'package:news/search_pages.dart';
+import 'package:news/pages/morePage.dart';
+import 'package:news/pages/search_pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,10 +69,7 @@ class _BottNavState extends State<BottNav> {
           iconTheme: IconThemeData(
             color: Colors.black, // <-- SEE HERE
           ),
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
-          ],
-          // centerTitle: true,
+          centerTitle: true,
           title: Text(
             widget.title,
             style: const TextStyle(color: Colors.black),
