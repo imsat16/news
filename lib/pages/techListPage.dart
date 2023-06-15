@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:news/modules/tech_news_list.dart';
 
 class TechListPage extends StatelessWidget {
