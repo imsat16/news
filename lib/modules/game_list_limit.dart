@@ -110,16 +110,14 @@ class _GameLimitListState extends State<GameLimitList> {
                 height: 100,
                 child: Row(
                   children: [
-                    Expanded(
-                      child: Image.network(
-                        data['thumb'],
-                        height: 100,
-                      ),
+                    Image.network(
+                      data['thumb'],
+                      height: 100,
                     ),
                     Flexible(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
+                            vertical: 10, horizontal: 15),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
