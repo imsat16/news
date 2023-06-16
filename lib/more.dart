@@ -27,7 +27,7 @@ class MorePages extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('ALIKA KHANSA FADILA'),
-                  Text('NIM : 172131'),
+                  Text('NIM : 17213034'),
                 ],
               )
             ],
@@ -55,7 +55,7 @@ class MorePages extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('CANDRA PURNAMA ALAM'),
-                  Text('NIM : 171314'),
+                  Text('NIM : 17213043'),
                 ],
               )
             ],
@@ -69,7 +69,7 @@ class MorePages extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('OGI RAHMANSYAH'),
-                  Text('NIM : 171314'),
+                  Text('NIM : 17213105'),
                 ],
               )
             ],

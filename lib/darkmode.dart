@@ -13,8 +13,8 @@ State<MyApp> createState() => _MyAppState();
 
 bool _iconBool = false;
 
-IconData _iconLight = Icon.wb_sunny;
-IconData _iconDark = Icon.nights_stay;
+IconData _iconLight = Icons.wb_sunny;
+IconData _iconDark = Icons.nights_stay;
 
 ThemeData _lightTheme = ThemeData(
   primarySwatch: Colors.amber,
