@@ -2,18 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news/modules/game_news_list.dart';
+import 'package:news/modules/view_all_news.dart';
 import 'package:news/pages/detail_pages.dart';
 
-class GameNewsList extends StatefulWidget {
-  const GameNewsList({super.key});
+class TechNewsList extends StatefulWidget {
+  const TechNewsList({super.key});
 
   @override
-  State<GameNewsList> createState() => _GameNewsListState();
+  State<TechNewsList> createState() => _TechNewsListState();
 }
 
-class _GameNewsListState extends State<GameNewsList> {
+class _TechNewsListState extends State<TechNewsList> {
   List<Map<String, dynamic>> results = [];
-  List<Map<String, dynamic>> gameData = [];
+  List<Map<String, dynamic>> techData = [];
 
   @override
   void initState() {
@@ -22,16 +24,16 @@ class _GameNewsListState extends State<GameNewsList> {
   }
 
   Future<void> fetchData() async {
-    String apiUrl = "https://the-lazy-media-api.vercel.app/api/games";
+    String apiUrl = "https://the-lazy-media-api.vercel.app/api/tech";
 
     var response = await http.get(Uri.parse(apiUrl));
 
     if (mounted) {
       setState(() {
         var data = json.decode(response.body);
-        gameData = List<Map<String, dynamic>>.from(data);
+        techData = List<Map<String, dynamic>>.from(data);
       });
-      print(gameData);
+      print(techData);
     } else {
       print('Failed get data from api');
     }
@@ -91,7 +93,7 @@ class _GameNewsListState extends State<GameNewsList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: gameData.length,
+        itemCount: techData.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -102,19 +104,18 @@ class _GameNewsListState extends State<GameNewsList> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  elevation: 10,
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      navigateToDetailPage(gameData[index]['key']);
+                      navigateToDetailPage(techData[index]['key']);
                     },
                     child: SizedBox(
                       height: 100,
                       child: Row(
                         children: [
                           Image.network(
-                            gameData[index]['thumb'],
+                            techData[index]['thumb'],
                             height: 100,
                           ),
                           Flexible(
@@ -132,7 +133,7 @@ class _GameNewsListState extends State<GameNewsList> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 2),
                                       child: Text(
-                                        gameData[index]['title'],
+                                        techData[index]['title'],
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 12.5,
@@ -154,7 +155,7 @@ class _GameNewsListState extends State<GameNewsList> {
                                         ),
                                       ),
                                       Text(
-                                        gameData[index]['author'],
+                                        techData[index]['author'],
                                         style: const TextStyle(
                                             color: Colors.grey, fontSize: 11),
                                       ),
@@ -167,7 +168,7 @@ class _GameNewsListState extends State<GameNewsList> {
                                           color: Color.fromARGB(255, 0, 0, 0),
                                         ),
                                       ),
-                                      Text(gameData[index]['time'],
+                                      Text(techData[index]['time'],
                                           style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 11)),
@@ -183,7 +184,7 @@ class _GameNewsListState extends State<GameNewsList> {
                   ),
                 ),
               )
-              // Image.network(gameData[index]['thumb'])
+              // Image.network(techData[index]['thumb'])
             ],
           );
         });

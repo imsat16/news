@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:news/home.dart';
-import 'package:news/modules/game_news_list.dart';
+import 'package:news/pages/homePage.dart';
 import 'package:news/modules/onboarding.dart';
-import 'package:news/more.dart';
-import 'package:news/search_pages.dart';
+import 'package:news/pages/morePage.dart';
+import 'package:news/pages/search_pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,24 +19,22 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.white),
-          color: Colors.black87,
-          foregroundColor: Colors.white,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.black,
-            statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.dark,
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.white),
+            color: Colors.black87,
+            foregroundColor: Colors.white,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.black,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.dark,
+            ),
           ),
-        ),
-        primarySwatch: Colors.blue,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.black
-        )
-      ),
+          primarySwatch: Colors.blue,
+          textSelectionTheme:
+              const TextSelectionThemeData(cursorColor: Colors.black)),
       //home: const BottNav(title: 'T&G News'),
       //  home: const GameNewsList(),
-       home: const OnBoarding(),
+      home: const OnBoarding(),
     );
   }
 }
@@ -68,9 +65,20 @@ class _BottNavState extends State<BottNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: _selectedIndex == 1
+          ? null
+          : AppBar(
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
+              centerTitle: true,
+              title: Text(
+                widget.title,
+                style: TextStyle(color: Colors.black),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

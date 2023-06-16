@@ -12,7 +12,8 @@ class DetailPage extends StatelessWidget {
 
     for (var item in content) {
       if (item is String) {
-        List<String> links = regex.allMatches(item).map((match) => match.group(0)!).toList();
+        List<String> links =
+            regex.allMatches(item).map((match) => match.group(0)!).toList();
         imageLinks.addAll(links);
       }
     }
@@ -25,12 +26,21 @@ class DetailPage extends StatelessWidget {
     String title = data['results']['title'];
     String author = data['results']['author'];
     String terbit = data['results']['date'];
+    List<dynamic> category = data['results']['categories'];
     List<dynamic> content = data['results']['content'];
     List<String> imageLinks = extractImageLinks(content);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tech & Game News App', style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // <-- SEE HERE
+        ),
+        title: Text(
+          category[0],
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,8 +49,9 @@ class DetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title, 
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                title,
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 18),
               Row(
@@ -49,24 +60,28 @@ class DetailPage extends StatelessWidget {
                   Row(
                     children: [
                       const Text(
-                        "Penulis :", 
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                        "Penulis :",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        author, 
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                        author,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
                       ),
                     ],
                   ),
                   Text(
-                    terbit, 
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                    terbit,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w300),
                   ),
                 ],
               ),
               const SizedBox(height: 50),
-              for (var index = 0; index < content.length; index++) 
-                if (content[index] is String && imageLinks.contains(content[index]))
+              for (var index = 0; index < content.length; index++)
+                if (content[index] is String &&
+                    imageLinks.contains(content[index]))
                   Image.network(content[index])
                 else
                   Padding(
