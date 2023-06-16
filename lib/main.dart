@@ -65,17 +65,20 @@ class _BottNavState extends State<BottNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.black, // <-- SEE HERE
-          ),
-          centerTitle: true,
-          title: Text(
-            widget.title,
-            style: const TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0),
+      appBar: _selectedIndex == 1
+          ? null
+          : AppBar(
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
+              centerTitle: true,
+              title: Text(
+                widget.title,
+                style: TextStyle(color: Colors.black),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

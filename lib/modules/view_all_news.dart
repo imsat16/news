@@ -107,6 +107,9 @@ class _AllNewsState extends State<AllNews> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 width: double.infinity,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
@@ -118,7 +121,7 @@ class _AllNewsState extends State<AllNews> {
                       child: Row(
                         children: [
                           Image.network(
-                            gameData[index]['thumb'],
+                            combinedData[index]['thumb'],
                             height: 100,
                           ),
                           Flexible(
@@ -130,14 +133,18 @@ class _AllNewsState extends State<AllNews> {
                                     MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 2),
-                                    child: Text(
-                                      gameData[index]['title'],
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2),
+                                      child: Text(
+                                        combinedData[index]['title'],
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12.5),
+                                      ),
                                     ),
                                   ),
                                   Row(
@@ -154,7 +161,7 @@ class _AllNewsState extends State<AllNews> {
                                         ),
                                       ),
                                       Text(
-                                        gameData[index]['author'],
+                                        combinedData[index]['author'],
                                         style: const TextStyle(
                                             color: Colors.grey, fontSize: 11),
                                       ),
@@ -167,7 +174,7 @@ class _AllNewsState extends State<AllNews> {
                                           color: Color.fromARGB(255, 0, 0, 0),
                                         ),
                                       ),
-                                      Text(gameData[index]['time'],
+                                      Text(combinedData[index]['time'],
                                           style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 11)),
@@ -183,7 +190,7 @@ class _AllNewsState extends State<AllNews> {
                   ),
                 ),
               )
-              // Image.network(gameData[index]['thumb'])
+              // Image.network(combinedData[index]['thumb'])
             ],
           );
         });

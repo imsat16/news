@@ -1,18 +1,14 @@
 import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:news/modules/game_news_list.dart';
-import 'package:news/modules/tech_carousel.dart';
 import 'package:news/modules/tech_news_list.dart';
 import 'package:news/modules/view_all_news.dart';
 import 'package:news/pages/detail_pages.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -21,6 +17,13 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List<Map<String, dynamic>> results = [];
   List<Map<String, dynamic>> getNews = [];
+
+  int _selectedIndex = 0;
+  List<Widget> _pages = [
+    const AllNews(),
+    const TechNewsList(),
+    const GameNewsList(),
+  ];
 
   @override
   void initState() {
@@ -125,106 +128,174 @@ class _SearchPageState extends State<SearchPage> {
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         body: SafeArea(
-          child: ListView(
+          child: Column(
             children: [
-              Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8.0, right: 8.0, bottom: 10, top: 30),
+              ClipPath(
+                clipper: BackgroundWaveClipper(),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 180,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 54, 176, 247),
+                        Color.fromARGB(255, 54, 93, 116)
+                      ],
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchBar(
-                            hintText:
-                                "Cari berita Teknologi & Game dengan mudah",
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText:
+                                  "Cari berita Teknologi & Game dengan mudah",
+                              hintStyle: const TextStyle(fontSize: 15),
+                              filled: true,
+                              fillColor:
+                                  const Color.fromARGB(255, 255, 255, 255),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              prefixIcon: const Icon(Icons.search),
+                            ),
                             onChanged: (value) {
                               searchData(value);
                             },
                           ),
                         ),
-                        const Padding(padding: EdgeInsets.all(8.0)),
-                        Ink(
-                          decoration: const ShapeDecoration(
-                            color: Colors.black87,
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              print("anjing");
-                            },
-                            icon: const Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
-                  results.isEmpty
-                      ? const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 10,
+                ),
+              ),
+              Expanded(
+                child: results.isEmpty
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 100.0,
                             ),
-                            Column(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 15.0, vertical: 20.0),
-                                  child: Text(
-                                    "All News",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                ChoiceChip(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                  label: const Text(
+                                    'All',
+                                    style: TextStyle(color: Colors.white),
                                   ),
-                                ),
-                                SizedBox(height: 500, child: AllNews()),
-                              ],
-                            )
-                          ],
-                        )
-                      :
-                      // results.isEmpty?const Text("Cari berita terupdate tentang Teknologi & Games"):
-                      SizedBox(
-                          height: 700,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 100),
-                            child: ListView.builder(
-                              itemCount: results.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Image.network(
-                                    results[index]['thumb'].toString(),
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  title: Text(
-                                    results[index]['title'].toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                  subtitle:
-                                      Text(results[index]['tag'].toString()),
-                                  trailing: const Icon(Icons.arrow_forward),
-                                  onTap: () {
-                                    handleItemTap(index);
-                                    navigateToDetailPage(index);
+                                  backgroundColor:
+                                      Color.fromARGB(255, 54, 176, 247),
+                                  selectedColor:
+                                      Color.fromARGB(255, 54, 93, 116),
+                                  selected: _selectedIndex == 0,
+                                  onSelected: (selected) {
+                                    setState(() {
+                                      _selectedIndex =
+                                          selected ? 0 : _selectedIndex;
+                                    });
                                   },
-                                );
-                              },
+                                ),
+                                ChoiceChip(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                  label: const Text(
+                                    'Technology',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 54, 176, 247),
+                                  selectedColor:
+                                      Color.fromARGB(255, 54, 93, 116),
+                                  selected: _selectedIndex == 1,
+                                  onSelected: (selected) {
+                                    setState(() {
+                                      _selectedIndex =
+                                          selected ? 1 : _selectedIndex;
+                                    });
+                                  },
+                                ),
+                                ChoiceChip(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                  label: const Text(
+                                    'Games',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 54, 176, 247),
+                                  selectedColor:
+                                      Color.fromARGB(255, 54, 93, 116),
+                                  selected: _selectedIndex == 2,
+                                  onSelected: (selected) {
+                                    setState(() {
+                                      _selectedIndex =
+                                          selected ? 2 : _selectedIndex;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                        )
-                ],
+                          Expanded(
+                            child: IndexedStack(
+                              index: _selectedIndex,
+                              children: _pages,
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(
+                        height: 600,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: ListView.builder(
+                            itemCount: results.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: Image.network(
+                                  results[index]['thumb'].toString(),
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  results[index]['title'].toString(),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.5,
+                                  ),
+                                ),
+                                subtitle:
+                                    Text(results[index]['tag'].toString()),
+                                trailing: const Icon(Icons.arrow_forward),
+                                onTap: () {
+                                  handleItemTap(index);
+                                  navigateToDetailPage(index);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -232,4 +303,27 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+}
+
+class BackgroundWaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+
+    final p0 = size.height * 0.75;
+    path.lineTo(0.0, p0);
+
+    final controlPoint = Offset(size.width * 0.4, size.height);
+    final endPoint = Offset(size.width, size.height / 1);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+
+    path.lineTo(size.width, 0.0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(BackgroundWaveClipper oldClipper) => oldClipper != this;
 }

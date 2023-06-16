@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news/modules/game_news_list.dart';
+import 'package:news/modules/view_all_news.dart';
 import 'package:news/pages/detail_pages.dart';
 
 class TechNewsList extends StatefulWidget {
@@ -117,17 +119,72 @@ class _TechNewsListState extends State<TechNewsList> {
                             height: 100,
                           ),
                           Flexible(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(techData[index]['title']),
-                          )),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2),
+                                      child: Text(
+                                        techData[index]['title'],
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.5,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.only(right: 5),
+                                        child: Icon(
+                                          Icons.account_circle_rounded,
+                                          size: 15,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      Text(
+                                        techData[index]['author'],
+                                        style: const TextStyle(
+                                            color: Colors.grey, fontSize: 11),
+                                      ),
+                                      const Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(
+                                          Icons.remove,
+                                          size: 10,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      ),
+                                      Text(techData[index]['time'],
+                                          style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 11)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
               )
-              // Image.network(gameData[index]['thumb'])
+              // Image.network(techData[index]['thumb'])
             ],
           );
         });
