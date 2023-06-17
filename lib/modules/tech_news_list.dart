@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:news/modules/game_news_list.dart';
-import 'package:news/modules/view_all_news.dart';
 import 'package:news/pages/detail_pages.dart';
 
 class TechNewsList extends StatefulWidget {
