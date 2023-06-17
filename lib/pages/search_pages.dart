@@ -134,7 +134,7 @@ class _SearchPageState extends State<SearchPage> {
                 clipper: BackgroundWaveClipper(),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 180,
+                  height: 285,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -146,11 +146,35 @@ class _SearchPageState extends State<SearchPage> {
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: TextField(
+                    child: Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 30),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Discover",
+                                  style: TextStyle(
+                                      fontSize: 50,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "Tech And Games News from all around the world",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          TextField(
                             decoration: InputDecoration(
                               hintText:
                                   "Cari berita Teknologi & Game dengan mudah",
@@ -159,7 +183,7 @@ class _SearchPageState extends State<SearchPage> {
                               fillColor:
                                   const Color.fromARGB(255, 255, 255, 255),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.circular(23),
                                 borderSide: const BorderSide(
                                   color: Colors.red,
                                 ),
@@ -170,8 +194,8 @@ class _SearchPageState extends State<SearchPage> {
                               searchData(value);
                             },
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -311,9 +335,9 @@ class BackgroundWaveClipper extends CustomClipper<Path> {
     var path = Path();
 
     final p0 = size.height * 0.75;
-    path.lineTo(0.0, p0);
+    path.lineTo(0.10, p0);
 
-    final controlPoint = Offset(size.width * 0.4, size.height);
+    final controlPoint = Offset(size.width * 0.20, size.height);
     final endPoint = Offset(size.width, size.height / 1);
     path.quadraticBezierTo(
         controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
