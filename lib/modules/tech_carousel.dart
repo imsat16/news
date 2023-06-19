@@ -78,7 +78,20 @@ class _TechCarouselState extends State<TechCarousel> {
       ...gameData.take(5), // Batasan jumlah data menjadi 5 dari endpoint kedua
     ];
 
-    return CarouselSlider(
+    return combinedData.isEmpty ? 
+      Center(
+        child: AspectRatio(
+        aspectRatio: 16/9,
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+           ),
+      )
+    : CarouselSlider(
       options: CarouselOptions(
         height: 180.0,
         enlargeCenterPage: true,
@@ -86,7 +99,7 @@ class _TechCarouselState extends State<TechCarousel> {
         aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
       items: combinedData.map(

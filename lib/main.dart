@@ -70,50 +70,69 @@ class _BottNavState extends State<BottNav> {
       appBar: _selectedIndex == 1
           ? null
           : AppBar(
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: Colors.black,
               ),
               centerTitle: true,
               title: Text(
                 widget.title,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ),
               backgroundColor: const Color.fromARGB(0, 255, 0, 0),
               elevation: 0,
             ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color.fromRGBO(255, 255, 255, 0), Colors.black],
-          stops: [0.10, 1.0],
-        )),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz),
-              label: 'Lainnya',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          iconSize: 30,
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          backgroundColor: const Color.fromARGB(0, 145, 145, 145),
-          selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
-          unselectedItemColor: Color.fromARGB(163, 255, 255, 255),
-          onTap: _onItemTapped,
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz),
+            label: 'Lainnya',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.black87,
+        onTap: _onItemTapped,
       ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //       gradient: LinearGradient(
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //     colors: [Color.fromRGBO(255, 255, 255, 0), Colors.black],
+      //     stops: [0.10, 1.0],
+      //   )),
+      //   child: BottomNavigationBar(
+      //     items: const <BottomNavigationBarItem>[
+      //       BottomNavigationBarItem(
+      //         icon: Icon(Icons.home),
+      //         label: 'Beranda',
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Icon(Icons.search),
+      //         label: 'Search',
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Icon(Icons.more_horiz),
+      //         label: 'Lainnya',
+      //       ),
+      //     ],
+      //     currentIndex: _selectedIndex,
+      //     iconSize: 30,
+      //     unselectedLabelStyle: const TextStyle(fontSize: 12),
+      //     backgroundColor: const Color.fromARGB(0, 145, 145, 145),
+      //     selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+      //     unselectedItemColor: Color.fromARGB(163, 255, 255, 255),
+      //     onTap: _onItemTapped,
+      //   ),
+      // ),
     );
   }
 }
